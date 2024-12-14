@@ -10,4 +10,4 @@ managedNodeGroups:
   - name: expense-mng
     instanceType: m5.large
     desiredCapacity: 3
-    #spot: true
+    #spot: true         ## we can use this spot instances for lower cost but no guarantee for the instances(nodes) availability.
