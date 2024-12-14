@@ -11,3 +11,6 @@ managedNodeGroups:
     instanceType: m5.large
     desiredCapacity: 3
     #spot: true         ## we can use this spot instances for lower cost but no guarantee for the instances(nodes) availability.
+    ## it is recommended to use the odd number of nodes in the EKS cluster like 3,5,7, etc.
+    ## refer: https://etcd.io/docs/v3.3/faq/#what-is-failure-tolerance
+    
