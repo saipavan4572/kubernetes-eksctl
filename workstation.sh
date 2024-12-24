@@ -9,6 +9,11 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+
 VALIDATE(){
    if [ $1 -ne 0 ]
    then
@@ -45,10 +50,18 @@ usermod -aG docker ec2-user
 VALIDATE $? "Docker installation"
 
 # install eksctl
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+# curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+# mv /tmp/eksctl /usr/local/bin
+# eksctl version
+# VALIDATE $? "eksctl installation"
+
+# eksctl
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
 mv /tmp/eksctl /usr/local/bin
 eksctl version
 VALIDATE $? "eksctl installation"
+
 
 # install kubectl
 curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.30.0/2024-05-12/bin/linux/amd64/kubectl
